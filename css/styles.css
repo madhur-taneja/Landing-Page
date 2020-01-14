@@ -88,6 +88,22 @@ section {
     transition: ease 0.3s all;
 }
 
+#navbar__list {
+    background: black;
+}
+
+.navbar__list__item {
+    margin: 1rem;
+}
+
+section.active {
+    background: linear-gradient( 0deg, rgba(156, 24, 24, 0.26) 100%, rgba(71, 26, 115, 0.774) 100% );
+}
+
+.active-nav {
+    color: red;
+}
+
 /* Header Styles */
 .page__header {
     background: #fff;
