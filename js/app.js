@@ -28,12 +28,13 @@ const sections = document.querySelectorAll("section");
 */
 
 //Function to check if an element is in viewport or not
-var isInViewport = function (elem) {
+function isInViewport(elem) {
 	var distance = elem.getBoundingClientRect();
+
 	return (
-		distance.top >= 0 &&
+		distance.top >= -300 &&
 		distance.left >= 0 &&
-		distance.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+		distance.bottom <= (1.3 * window.innerHeight || document.documentElement.clientHeight) &&
 		distance.right <= (window.innerWidth || document.documentElement.clientWidth)
 	);
 };
@@ -41,7 +42,7 @@ var isInViewport = function (elem) {
 //Function to remove active classes
 function deactivateSections() {
     sections.forEach((element)=>{
-        element.classList.remove("active");
+        element.classList.remove("your-active-class", "active");
     });
 }
 
@@ -63,7 +64,7 @@ window.addEventListener('load', buildNavbar())
 
 // Add class 'active' to section when near top of viewport
 function activateCurrentSection(currentSection) {
-    currentSection.classList.add("active");
+    currentSection.classList.add("your-active-class", "active");
 
     deactivateNavLinks();
     activateNavLinks(currentSection.getAttribute('id'));
@@ -115,16 +116,18 @@ scrollToSectionOnClick();
 
 // Set sections as active
 window.addEventListener('scroll', function (event) {
-    sections.forEach((element)=>{
-        //console.log(element);
+	event.preventDefault();
+	
+    sections.forEach((element) => {
+        // console.log(element);
         if (isInViewport(element)) {
             deactivateSections();
             activateCurrentSection(element);
-            //console.log('In viewport!');
+            // console.log('In viewport!');
         } else if(window.scrollY==0) {
             deactivateSections();
             deactivateNavLinks();
-            //console.log('No Change');
+            // console.log('No Change');
         }
     }, false);
 });
